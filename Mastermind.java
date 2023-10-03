@@ -16,7 +16,7 @@ public class Mastermind {
         Hard Difficulty - Dupes, 8 attempts, 8 Letters
         */
         Scanner scan = new Scanner(System.in);
-        System.out.println("Welcome to the Mastermind Game!");
+        System.out.println(" === Welcome to the Mastermind Game! === ");
         System.out.println("Choose Difficulty:\nEasy\t\tMedium\t\tHard");
         String difficulty = scan.nextLine().toLowerCase().strip();
         difficultyChoice(difficulty);
