@@ -29,7 +29,6 @@ public class Mastermind {
         Boolean Game_on = true;
         int attempts = 8;
         for(int i = 0; i < attempts; i++){
-            answer = "";
             System.out.println("Enter your guess");
             answer = scan.nextLine();
             answer = answer.toUpperCase();
@@ -39,28 +38,20 @@ public class Mastermind {
                 list.add(y);
             }
             String result = Round(list,random_arr);
+            result = result.toLowerCase();
             //System.out.println(list);
             System.out.println(result);
-            if(letters == 6) {
-                if(result.equals("rrrrrr")){
-                    System.out.println("You won!");
-                    break;
-                }
-                
+            if(result.equals("rrrrrr") || result.equals("rrrrrrrr")){
+                System.out.println("You won!");
+                break;
             }
-            else if(letters == 8) {
-                if(result.equals("rrrrrrrr")){
-                    System.out.println("You won!");
-                    break;
-                }
-                
-            }
-            
-            else if(letters == 8){
+              else {
                 System.out.println("Try Again");
-            }
+            } 
             answer = "";
             list.clear();
+            }
+
         }
       System.out.println("Would you like to play again? Choose a difficulty");
       String difficulty1 = scan.nextLine();
