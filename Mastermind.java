@@ -3,7 +3,7 @@ public class Mastermind {
     public static final List<Character> TEST_LIST = new ArrayList<>(Arrays.asList('A', 'B', 'C', 'D', 'E', 'F'));
     public static void main(String [] args) {
         /*
-        White peg - w - means color in the sequence but 
+         White peg - w - means color in the sequence but 
         not right position
 
         Red Peg - r - means both color in the sequence &
