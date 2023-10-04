@@ -21,6 +21,7 @@ public class Mastermind {
         String difficulty = scan.nextLine().toLowerCase().strip();
         difficultyChoice(difficulty);
     }
+    // functions
     public static void mastermind (int letters, boolean duplicates, String sequence) {
 
     }
