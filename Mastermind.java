@@ -61,25 +61,24 @@ public class Mastermind {
             }
             else {
                char [] guessArr = guess.toCharArray();
-               // Clues logic
-               Deque<Character> guessDeque = new ArrayDeque<>();
-               for (int i = 0; i < guessArr.length; i++) {
-                    guessDeque.addLast(guessArr[i]);
-               }
+               // Clues logic 
                 System.out.println(answers);
-                // System.out.println(guessDeque);                    
-                for (int i = 0; i < answers.size(); i++) {
-                    char first = guessDeque.getFirst();
-                    if (first == answers.get(i)) {
+                // System.out.println(guessArr); 
+                Deque<Character> answersCopy = new ArrayDeque<>(answers);    
+                // Langston's Modified Round() method               
+                for (int i = 0; i < guessArr.length; i++) {
+                    if (guessArr[i] == answers.get(i)) {
                         clues.add('r');
-                        guessDeque.removeFirst();
+                        answersCopy.removeFirstOccurrence(guessArr[i]);
                     }
-                    else if (guessDeque.contains(answers.get(i))) {
-                    clues.add('w');
-                    guessDeque.remove(answers.get(i));
+                    else if (answersCopy.contains(guessArr[i])) {
+                        clues.add('w');
+                        // System.out.println(answersCopy);
+                        answersCopy.removeFirstOccurrence(guessArr[i]);
+                        // System.out.println(answersCopy);
                     }
                 }
-                // System.out.println(guessDeque);
+                System.out.println(clues);
                 Collections.shuffle(clues);
                 System.out.println(clues);
                 attempts++;
