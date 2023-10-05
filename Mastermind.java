@@ -107,7 +107,8 @@ public class Mastermind {
             mastermind("easy", randomSeqNoDupes(6), 0);
         }
         else if (difficulty.equals("stop")) {
-            
+            System.out.println("Thank you for playing!!!");
+            System.out.println(" === GAME OVER === ");
         }
         else {
             System.out.println("Please input either easy, medium, or hard. Enter stop if done.");
