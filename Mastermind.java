@@ -16,7 +16,7 @@ public class Mastermind {
         Hard Difficulty - Dupes, 8 attempts, 8 Letters
         */
         System.out.println(" === Welcome to the Mastermind Game! === ");
-        System.out.println("Here are the rules:\n\nWhite peg - w - means color in the sequence but not right position\nRed Peg - r - means both color in the sequence & in right position\n\nPegs will not be presented in any order\n\nEasy Difficulty - No Dupes, 8 attempts, 6 Letters\nMedium Difficulty - Dupes, 8 attempts, 6 Letters\nHard Difficulty - Dupes, 8 attempts, 8 Letters\n");
+        System.out.println("Here are the rules:\n\nGuess a sequence of the characters only using the characters here:\n" + TEST_LIST + "\n\nType 'stop' if you want to stop playing before game over\n\nWhite peg - w - means color in the sequence but not right position\nRed Peg - r - means both color in the sequence & in right position\n\nPegs will not be presented in any order\n\nEasy Difficulty - No Dupes, 8 attempts, 6 Letters\nMedium Difficulty - Dupes, 8 attempts, 6 Letters\nHard Difficulty - Dupes, 8 attempts, 8 Letters\n");
         newGame();
     }
     // functions
@@ -39,55 +39,58 @@ public class Mastermind {
             if((attempts + 1) == 8) {
                 System.out.println("Last guess!");
             }
-            System.out.println("Guess Here");
+            System.out.println("Guess Here:");
+            Boolean allLetters = true;
             String guess = scan.nextLine();
-            // Assumes valid input
-            char [] guessArr = guess.toCharArray();
-            System.out.println(answers);
-            for (int i = 0; i < answers.size(); i++) {
-                if (guessArr[i] == answers.get(i)) {
-                    clues.add('r');
-                }
-                else if (answers.contains(guessArr[i])) {
-                    clues.add('w');
+            for (int i = 0; i < guess.length(); i++) {
+                char c = guess.charAt(i);
+                if (!Character.isLetter(c)) {
+                    allLetters = false;
+                    break;
                 }
             }
-            Collections.shuffle(clues);
-            System.out.println(clues);
-            attempts++;
-            if (!clues.contains('w') && clues.size() > 1) {
-                System.out.println("You win! It took you " + attempts + " tries!");
-                System.out.println("Do you want to play again?");
-                String response = scan.nextLine();
-                if (response.equals("yes")) {
-                    newGame();
-                }
-                else {
-                    System.out.println("Thank you for playing!!!");
-                    System.out.println(" === GAME OVER === ");
-                }
+            if (guess.toLowerCase().equals("stop")) {
+                System.out.println("\nThe right answer was:\n" + answers);
+                System.out.println("Thank you for playing!!!");
+                System.out.println(" === GAME OVER === ");
             }
-            else {
+            else if ((guess.length() != 6 && (!difficulty.equals("hard"))) || (guess.length() != 8 && difficulty.equals("hard")) || allLetters == false) {
+                attempts++;
+                System.out.println("Only use letters 'ABCDEF' & remember the rules, you just used up one of your guesses. You have " + (8 - attempts) + " tries left!");
                 mastermind(difficulty, answers, attempts);
             }
+            else {
+               char [] guessArr = guess.toCharArray();
+                // System.out.println(answers);
+                for (int i = 0; i < answers.size(); i++) {
+                    if (guessArr[i] == answers.get(i)) {
+                        clues.add('r');
+                    }
+                    else if (answers.contains(guessArr[i])) {
+                    clues.add('w');
+                    }
+                }
+                Collections.shuffle(clues);
+                System.out.println(clues);
+                attempts++;
+                if (!clues.contains('w') && clues.size() > 1) {
+                    System.out.println("You win! It took you " + attempts + " tries!");
+                    System.out.println("Do you want to play again?");
+                    String response = scan.nextLine();
+                    if (response.equals("yes")) {
+                        newGame();
+                    }
+                    else {
+                        System.out.println("Thank you for playing!!!");
+                        System.out.println(" === GAME OVER === ");
+                    }
+                }
+                else {
+                    mastermind(difficulty, answers, attempts);
+                } 
+            }
         }
-        // recMastermind(guess, difficulty, answerSequence, 0);
     }
-
-    // private static void recMastermind (String guess, String difficulty, List<Character> answers, int attempts) {
-    //     List<Character> clues = new ArrayList<>();
-    //     char [] guessArr = guess.toCharArray();
-    //     System.out.println(answers);
-    //     for (int i = 0; i < answers.size(); i++) {
-    //         if (guessArr[i].equals(answers.get(i))) {
-    //             clues.add('r');
-    //         }
-    //         else if (answers.contains(guessArr[i])) {
-    //             clues.add('w');
-    //         }
-    //     }
-
-    // }
 
     public static void difficultyChoice (String difficulty) {
         Scanner scan = new Scanner(System.in);
