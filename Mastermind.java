@@ -55,7 +55,7 @@ public class Mastermind {
             Collections.shuffle(clues);
             System.out.println(clues);
             attempts++;
-            if (!clues.contains('w')) {
+            if (!clues.contains('w') && clues.size() > 1) {
                 System.out.println("You win! It took you " + attempts + " tries!");
                 System.out.println("Do you want to play again?");
                 String response = scan.nextLine();
@@ -120,7 +120,7 @@ public class Mastermind {
             int randomIdx = rand.nextInt(TEST_LIST.size());
             result.add(TEST_LIST.get(randomIdx));
         }
-        System.out.println(result);
+        // System.out.println(result);
         return result;
     }
 
