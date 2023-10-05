@@ -61,19 +61,27 @@ public class Mastermind {
             }
             else {
                char [] guessArr = guess.toCharArray();
-                // System.out.println(answers);
+               // Clues logic
+               Deque<Character> guessDeque = new ArrayDeque<>();
+               for (int i = 0; i < guessArr.length; i++) {
+                    guessDeque.addLast(guessArr[i]);
+               }
+                System.out.println(answers);                    
                 for (int i = 0; i < answers.size(); i++) {
-                    if (guessArr[i] == answers.get(i)) {
+                    char first = guessDeque.getFirst();
+                    if (first == answers.get(i)) {
                         clues.add('r');
+                        guessDeque.removeFirst();
                     }
-                    else if (answers.contains(guessArr[i])) {
+                    else if (guessDeque.contains(answers.get(i))) {
                     clues.add('w');
+                    guessDeque.remove(answers.get(i));
                     }
                 }
                 Collections.shuffle(clues);
                 System.out.println(clues);
                 attempts++;
-                if (!clues.contains('w') && clues.size() > 1) {
+                if (!clues.contains('w') && (clues.size() == 6 || clues.size() == 8)) {
                     System.out.println("You win! It took you " + attempts + " tries!");
                     System.out.println("Do you want to play again?");
                     String response = scan.nextLine();
