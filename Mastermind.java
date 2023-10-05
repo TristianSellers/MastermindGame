@@ -39,7 +39,7 @@ public class Mastermind {
             if((attempts + 1) == 8) {
                 System.out.println("Last guess!");
             }
-            System.out.println("Guess Here:");
+            System.out.println("\nGuess Here:");
             Boolean allLetters = true;
             String guess = scan.nextLine();
             for (int i = 0; i < guess.length(); i++) {
@@ -66,7 +66,8 @@ public class Mastermind {
                for (int i = 0; i < guessArr.length; i++) {
                     guessDeque.addLast(guessArr[i]);
                }
-                System.out.println(answers);                    
+                System.out.println(answers);
+                // System.out.println(guessDeque);                    
                 for (int i = 0; i < answers.size(); i++) {
                     char first = guessDeque.getFirst();
                     if (first == answers.get(i)) {
@@ -78,6 +79,7 @@ public class Mastermind {
                     guessDeque.remove(answers.get(i));
                     }
                 }
+                // System.out.println(guessDeque);
                 Collections.shuffle(clues);
                 System.out.println(clues);
                 attempts++;
