@@ -16,7 +16,7 @@ public class Mastermind {
         Hard Difficulty - Dupes, 8 attempts, 8 Letters
         */
         System.out.println(" === Welcome to the Mastermind Game! === ");
-        System.out.println("Here are the rules:\n\nGuess a sequence of the characters only using the characters here:\n" + TEST_LIST + "\n\nType 'stop' if you want to stop playing before game over\n\nWhite peg - w - means color in the sequence but not right position\nRed Peg - r - means both color in the sequence & in right position\n\nPegs will not be presented in any order\n\nEasy Difficulty - No Dupes, 8 attempts, 6 Letters\nMedium Difficulty - Dupes, 8 attempts, 6 Letters\nHard Difficulty - Dupes, 8 attempts, 8 Letters\n");
+        System.out.println("Here are the rules:\n\nGuess a sequence of the characters only using the characters here:\n" + TEST_LIST + "\n\nType 'stop' if you want to stop playing before game over\nType 'guess' if you want to see how many attempts you have left\n\nWhite peg - w - means color in the sequence but not right position\nRed Peg - r - means both color in the sequence & in right position\n\nPegs will not be presented in any order\n\nEasy Difficulty - No Dupes, 8 attempts, 6 Letters\nMedium Difficulty - Dupes, 8 attempts, 6 Letters\nHard Difficulty - Dupes, 8 attempts, 8 Letters\n");
         newGame();
     }
     // functions
@@ -54,6 +54,10 @@ public class Mastermind {
                 System.out.println("Thank you for playing!!!");
                 System.out.println(" === GAME OVER === ");
             }
+            else if (guess.toLowerCase().equals("guess")) {
+                System.out.println("You have " + (8 - attempts) + " attempts left!");
+                mastermind(difficulty, answers, attempts);
+            }
             else if ((guess.length() != 6 && (!difficulty.equals("hard"))) || (guess.length() != 8 && difficulty.equals("hard")) || allLetters == false) {
                 attempts++;
                 System.out.println("Only use letters 'ABCDEF' & remember the rules, you just used up one of your guesses. You have " + (8 - attempts) + " tries left!");
@@ -62,7 +66,7 @@ public class Mastermind {
             else {
                char [] guessArr = guess.toCharArray();
                // Clues logic 
-                System.out.println(answers);
+                // System.out.println(answers);
                 // System.out.println(guessArr); 
                 Deque<Character> answersCopy = new ArrayDeque<>(answers);    
                 // Langston's Modified Round() method               
@@ -78,7 +82,7 @@ public class Mastermind {
                         // System.out.println(answersCopy);
                     }
                 }
-                System.out.println(clues);
+                // System.out.println(clues);
                 Collections.shuffle(clues);
                 System.out.println(clues);
                 attempts++;
